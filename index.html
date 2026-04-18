@@ -6,7 +6,6 @@
 <title>CPM Rank king</title>
 <style>
     :root {
-        /* UI SIZE 0.5 の反映（全体的なスケールを小さめに調整） */
         --base-scale: 0.8; 
         --bg-color: #000;
         --text-color: #fff;
@@ -15,6 +14,7 @@
         --error-color: #ff3b30;
         --success-color: #34c759;
     }
+
     body {
         background-color: var(--bg-color);
         color: var(--text-color);
@@ -27,16 +27,25 @@
         transform: scale(var(--base-scale));
         transform-origin: center center;
     }
+
     .container {
         width: 100%;
         max-width: 340px;
         padding: 20px;
-        display: center;
+        display: flex;
         flex-direction: column;
         gap: 15px;
     }
+
     .header { text-align: center; margin-bottom: 5px; }
-    h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; margin: 0; }
+
+    h1 {
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        margin: 0;
+    }
+
     input {
         width: 100%;
         background: var(--input-bg);
@@ -48,7 +57,9 @@
         box-sizing: border-box;
         outline: none;
     }
+
     input:focus { border-color: #666; }
+
     button {
         width: 100%;
         padding: 12px;
@@ -59,10 +70,30 @@
         cursor: pointer;
         transition: opacity 0.2s;
     }
+
     button:active { opacity: 0.7; }
-    .btn-primary { background-color: var(--accent-color); color: var(--bg-color); }
-    .btn-secondary { background-color: var(--input-bg); color: var(--text-color); }
-    .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .btn-primary {
+        background-color: var(--accent-color);
+        color: var(--bg-color);
+    }
+
+    .btn-secondary {
+        background-color: var(--input-bg);
+        color: var(--text-color);
+    }
+
+    /* ✅ التعديل هنا */
+    .grid-menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .grid-menu button {
+        width: 200px;
+    }
+
     h2 {
         font-size: 11px;
         text-transform: uppercase;
@@ -70,14 +101,22 @@
         color: #555;
         margin: 10px 0 5px 0;
         font-weight: 600;
+        text-align: center;
     }
+
     #status, #serviceStatus {
         font-size: 11px;
         text-align: center;
         min-height: 18px;
         color: #666;
     }
-    footer { margin-top: 40px; text-align: center; font-size: 10px; color: #222; }
+
+    footer {
+        margin-top: 40px;
+        text-align: center;
+        font-size: 10px;
+        color: #222;
+    }
 </style>
 </head>
 <body>
